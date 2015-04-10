@@ -17,12 +17,11 @@ def entries_histogram(turnstile_weather):
 
     plt.xlabel('hourly entries')
     plt.ylabel('frequency')
-
     #plot a historgram for hourly entries when it is not raining
-    turnstile_weather[turnstile_weather['rain']==False]["ENTRIESn_hourly"].hist(bins=40, label = "no rain")
+    turnstile_weather[turnstile_weather['rain']==False]["ENTRIESn_hourly"].hist(bins=80, label = "no rain")
 
     #plot a historgram for hourly entries when it is raining
-    turnstile_weather[turnstile_weather['rain']==True]["ENTRIESn_hourly"].hist(bins=40, label = "rain")
+    turnstile_weather[turnstile_weather['rain']==True]["ENTRIESn_hourly"].hist(bins=80, label = "rain")
 
     #put in a legend...
     plt.legend()
@@ -103,14 +102,65 @@ def rain_by_time_and_station(turnstile_weather):
 			#print i
 			#print j
 			if rain_by_unit[j][i] == 1:
-				pixels[j,i] = (255,255,255)
+				pixels[i,j] = (255,255,255)
 			elif rain_by_unit[j][i]==0:
-				pixels[j,i] = (0,0,0)
+				pixels[i,j] = (0,0,0)
 			else:
-				pixels[j,i] = (255,0,0)
+				pixels[i,j] = (255,0,0)
 	print 'step 3 complete'	
 	
 	img.save("../rain_by_unit_and_date","bmp")
+
+
+def ridership_by_time(turnstile_weather):
+
+	## create a dictionary of dates to numerical values,
+	## to keep track of order, and fill in blanks
+
+	dates = list(set(turnstile_weather['DATEn'].values.tolist()))
+	#print dates
+	dates_dict = {}
+	i=0 
+	for date in sorted(dates):
+		dates_dict[date]=i
+		i+=1
+	#print dates_dict
+
+	time_dict = {
+	"00:00:00":0,
+	"04:00:00":1,
+	"08:00:00":2,
+	"12:00:00":3,
+	"16:00:00":4,
+	"20:00:00":5	
+	}
+
+	print 'step 1 complete'
+	
+
+	## iterate through data for each unit,
+	## and enter
+	riders_by_date = [0]*(6*len(dates_dict))
+	#print len(rain_by_date)
+	for entry in turnstile_weather.iterrows():
+		pos = dates_dict[entry[1]["DATEn"]]*6+time_dict[entry[1]["TIMEn"]]
+
+		riders_by_date[pos] += entry[1]["ENTRIESn_hourly"]
+			
+	#print len(rain_by_date)
+	
+	print 'step 2 complete'
+
+	plt.plot(riders_by_date)
+	plt.show()
+	
+	
+
+
+
+
 #entries_histogram(turnstile_weather)
 
-rain_by_time_and_station(turnstile_weather)
+#rain_by_time_and_station(turnstile_weather)
+
+ridership_by_time(turnstile_weather)

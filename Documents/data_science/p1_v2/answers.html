@@ -1,0 +1,144 @@
+<h3>Section 1. Statistical Test</h3>
+
+<h3>1.1 Which statistical test did you use to analyse the NYC subway data? Did you use a one-tail or a two-tail P value? What is the null hypothesis? What is your p-critical value?</h3>
+
+	<p>I used a two tailed Mann-Whitney U test, whith a p critical value of .05. The null hypothesis in this case is that the ridership on any given rainy day is niether more nor less likely to have a higher value than the ridership on any given clear day.</p> 
+
+<h3>1.2 Why is this statistical test applicable to the dataset? In particular, consider the assumptions that the test is making about the distribution of ridership in the two samples.</h3>
+
+	<p>The Mann Whitney U test is particularly useful for this data set given its non-normal distribution. The Mann Whiteney U test, (unlike the Welche's T-test), does not assume a normal distribution, so it can be used on this data set to compare the two populations.</p> 
+
+<h3>1.3 What results did you get from this statistical test? These should include the following numerical values: p-values, as well as the means for each of the two samples under test.</h3>
+
+	<ul>
+	<li>Mean with no rain: 1105.5</li>
+	<li>Mean with rain: 1090.3</li>
+	<li>p value: 0.0249</li>
+	</ul>
+
+<h3>1.4 What is the significance and interpretation of these results?</h3>
+
+	<p>With a p critical value of 0.05 (divided by 2 for a 2 tailed test) the given p value of .0249 just barely "passes" the test. The means for clear and rainy days differ from one another by approximately 1%. While the difference in means appears otherwise insignificant, the result from the Mann Whitney U test demonstrates that the ridership on rainy days is consistently higher than the ridership on clear days.</p>
+
+<h3>Section 2. Linear Regression</h3>
+
+<h3>2.1 What approach did you use to compute the coefficients theta and produce prediction for ENTRIESn_hourly in your regression model:</h3>
+    
+    <h3>Gradient descent (as implemented in exercise 3.5)</h3>
+    <h3>OLS using Statsmodels</h3>
+    <h3>Or something different?</h3>
+
+	<p>Gradient decent was used to compute the coefficients of theta.</p>
+
+<h3>2.2 What features (input variables) did you use in your model? Did you use any dummy variables as part of your features?</h3>
+
+	<p>The following features were used as input variables:</p>
+		<ul>
+		<li>presence of rain</li>
+		<li>weekday vs. weekend</li>
+		</ul>
+		<p>-->A set of dummy variables was also used to represent the turnstile unit, and the time of the day.</p>
+
+<h3>2.3 Why did you select these features in your model? We are looking for specific reasons that lead you to believe that the selected features will contribute to the predictive power of your model.</h3>
+
+    <h3>Your reasons might be based on intuition. For example, response for fog might be: “I decided to use fog because I thought that when it is very foggy outside people might decide to use the subway more often.”</h3>
+    <h3>Your reasons might also be based on data exploration and experimentation, for example: “I used feature X because as soon as I included it in my model, it drastically improved my R2 value.”  </h3>
+	
+	<p> RAIN: I found rain to be a good candidate based off of the data analysis using the mannwhitney U test, which indicated a significant difference in ridership on the basis the presence of rain.</p>
+	<p> TIME OF DAY: Time of day is a good candidate, because one can expect regular patterns of increased/ or decreased travel at different times of day.</p>
+	<p> WEEKDAY: likewise, the weekday parameter is a good candidate, because one can expect less activity on weekends.</p>
+	<p> UNIT: The turnstile unit is a good feature, or rather, it is one that is important to take into account, because different locations are likely to have different volumes of passengers.</p>
+
+<h3>2.4 What are the coefficients (or weights) of the features in your linear regression model?</h3>
+	<h3>Rain Coefficient: </h3>
+	<ul><li>1.72187139e+01</li></ul>
+	<h3>Weekday Coeeficient:</h3>
+	<ul><li>4.53002075e+02</li></ul>
+
+	<h3>HOUR COEFFICIENTS:</h3>
+	<ul>
+	<li>00: -5.77327558e+02 </li>
+	<li>04: -4.29671714e+02  </li>
+	<li>08:  4.40671969e+02</li>
+	<li>12:  1.73381789e+02  </li>
+	<li>16:  5.23268892e+02  </li>
+	<li>20:  1.88589194e+03</li>
+	</ul>
+	<p>->Turnstile unit coefficients are omitted here, because there are too many.</p>
+
+<h3>2.5 What is your models R2 (coefficients of determination) value?</h3>
+	
+	<p>R2: 0.54</p>
+
+<h3>2.6 What does this R2 value mean for the goodness of fit for your regression model? Do you think this linear model to predict ridership is appropriate for this dataset, given this R2  value?</h3>
+	
+	<p>This value can be interpreted to mean that 54% of the variation in the ridership can be explained by the variation in the parameters of the model. So this model is not a very good fit, although it is better than chance.</p>
+
+<h3>Section 3. Visualization</h3>
+	
+
+Please include two visualizations that show the relationships between two or more variables in the NYC subway data. You should feel free to implement something that we discussed in class (e.g., scatter plots, line plots, or histograms) or attempt to implement something more advanced if you'd like.
+	
+
+Remember to add appropriate titles and axes labels to your
+
+plots. Also, please add a short description below each figure commenting on the key insights depicted in the figure.
+
+3.1 One visualization should contain two histograms: one of  ENTRIESn_hourly for rainy days and one of ENTRIESn_hourly for non-rainy days.
+
+    <h3>You can combine the two histograms in a single plot or you can use two separate plots.</h3>
+    <h3>If you decide to use to two separate plots for the two histograms, please ensure that the x-axis limits for both of the plots are identical. It is much easier to compare the two in that case.</h3>
+    <h3>For the histograms, you should have intervals representing the volume of ridership (value of ENTRIESn_hourly) on the x-axis and the frequency of occurrence on the y-axis. For example, you might have one interval (along the x-axis) with values from 0 to 1000. The height of the bar for this interval will then represent the number of records (rows in our data) that have ENRIESn_hourly that fall into this interval.</h3>
+
+    <h3>Remember to increase the number of bins in the histogram (by having larger number of bars). The default bin width is not sufficient to capture the variability in the two samples.</h3>
+
+
+<img src="visualizations/rain_vs_no_rain_histogram.png">
+<p>The histogram demonstrates that the two distributions are non normal, and similar to one another. We can also see that the total number of riders is larger for non-rainy days.</p>
+
+<h3>3.2 One visualization can be more freeform. Some suggestions are:</h3>
+
+    <h3>Ridership by time-of-day or day-of-week</h3>
+    <h3>Which stations have more exits or entries at different times of day</h3>
+<img src="visualizations/rain_by_unit_and_date.png">
+<p>This image shows that most of the rainy time periods for each unit occur in unison with one another (since we see vertical white bands, rather than randomly distributed white pixels). We can see from the visualization that only four periods of rain occur during the course of this data collection. Moreover, we can see that most of the rainy days occur during one stretch of time towards the middle of the data collection period.</p>
+<h3>Section 4. Conclusion</h3>
+
+<h3>Please address the following questions in detail. Your answers should be 1-2 paragraphs long.</h3>
+
+<h3>4.1 From your analysis and interpretation of the data, do more people ride
+the NYC subway when it is raining or when it is not raining? </h3>
+ 
+	<p>It appears to be the case from the analysis that more people ride the subway when it is raining from the data analysis, although there is not enough data to make a conclusion either way.</p>
+
+<h3>4.2 What analyses lead you to this conclusion? You should use results from both your statistical
+tests and your linear regression to support your analysis.</h3>
+    
+	<p>The mean hourly entries on days with rain was observed to be slightly greater than that of the mean hourly entries on days without rain (by approximately 1%). The Mann Whitney U test generated a p value which was just barely under the threshold for passing the threshold for passing the p test. resulted in a significantly low p value. This demonstrated a trend of consistently higher hourly entries on rainy days.</p>
+	<p>The theta value from the linear regression model was negative, and approximately 10% the size of the other theta values. This alone is not particularly helpful, because it is clear from the resulting theta values that the volume of ridership is affected more significantly by the hour and day of the week parameters. However along with the results from the statistical analysis, it does help to reinforce the trend for more people to ride the subway when it is raining.</p>
+	<p>Most importantly however, the observation from second data visualization showed that most of the rainy entries occured during a single stretch of time. This means that any number of other events during the time it was raining, including the time of day and the day of the week, could have influence the results of the statistical analysis. This is what lead me to conclude that there is not sufficient data to imply weather or not the presence of rain has a noticable effect on ridership.</p>
+
+<h3>Section 5. Reflection</h3>
+
+<h3>Please address the following questions in detail. Your answers should be 1-2 paragraphs long.</h3>
+
+<h3>5.1 Please discuss potential limitations and/or issues with the methods
+of your analysis, include limitations of and/or issues with the:</h3>
+
+    <h3>5.1.1: Dataset:</h3>
+	<p>->The data set is taken over a relatively short time span (one month). It only accounts for a four full weeks, which makes the distribution less homogenous.</p>
+	<p>-> The data sample are only taken every four hours, so a lot of the details are left out.
+	<p>->It can also be assumed that the data is not entirely accurate. For example people may cheat, and their entries aren't accounted for or there may be gitches in the data collection system. <p>
+
+    <h3>5.1.2 Linear regression model:</h3>
+	<p>->Many of the available features may have non-linear trends that can not be modelled as scalar parameters. For example, it may be possible that temperature effects ridership only when it is extremely hot.</p>
+	<p>->This dataset is also distributed accross several different regions, which may cause variations in the way in which different parameters influence the data (i.e a poor neighborhood may respond differently to rain than a wealthy neighborhood, or may have different work schedules).</p>
+	<p>->A limitation of both the data set and the linear regression model is that there are several factors that could potentially influence ridership that are not accounted for. Possible influences might include holidays, seasons, economic events and trends, extreme weather events, etc... </p>
+
+    <h3>5.1.3: Statistical tests:</h3>
+	<p>The limited time span of this data set makes it difficult to generalize the results of the statistical analysis to a larger population.</p>
+<p>The Mann Whitney U test assumes two identical distributions. As was observed in the second data visualization, the distributions of ridership volume on rainy and non rainy days are not independent, because they occur at two distinct times. This means that it is possible something else influenced the results of the test during these periods.</p>
+
+<h3>5.2 (Optional) Do you have any other insight about the dataset that you would like to share with us?</h3>
+	<p>While looking at the second data visualization, I saw that nearly all of the missing data points occured in clusters and at periodic intervals. This may be intentional (i.e. regular maintanance), although if it is not, it might indicate periodic failure of the data collection system that could be looked into.</p>
+
