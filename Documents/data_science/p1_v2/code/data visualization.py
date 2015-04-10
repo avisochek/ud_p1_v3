@@ -7,10 +7,17 @@ from PIL import Image
 import numpy as np
 
 
+## import data to turnstile_weather dataframe...
 filepath = '../turnstile_weather_v2.csv'
 turnstile_weather = pandas.read_csv(filepath)
 
 
+
+
+## generate two histogram of the total hourly entries
+## on the same plot,
+## one for the entries when it was raining 
+## and the other when it was not raining
 def entries_histogram(turnstile_weather):
     
     plt.figure()
@@ -30,15 +37,17 @@ def entries_histogram(turnstile_weather):
     return
 
 
+
+
 ## generate a bitmap image, where the horizontal axis represents the 4 hour periods
 ## over the month of may, and the vertical axis reprsents each individual turnstile collection unit.
+## color a pixel white if it was rainging, black if it was not, or red if the data is not available...
+
 def rain_by_time_and_station(turnstile_weather):
 
-	##Obtain a list of each of the turnstile units
-	units = list(set(turnstile_weather['UNIT'].values.tolist()))
-
-	## create a dictionary of dates to numerical values,
-	## to keep track of order, and fill in blanks
+	## 1. create a python dictionary to map
+	## all of the dates and times in the dataset
+	## to numerical values.
 
 	dates = list(set(turnstile_weather['DATEn'].values.tolist()))
 	#print dates
@@ -57,12 +66,16 @@ def rain_by_time_and_station(turnstile_weather):
 	"16:00:00":4,
 	"20:00:00":5	
 	}
-
 	print 'step 1 complete'
 	
 
-	## iterate through data for each unit,
-	## and assemble 
+	## 2. Create a list for the data of
+	## each turnstile unit -- ordered by date and time--
+	## and aggregate into a 2d array.
+	
+	##Obtain a list of each of the turnstile units
+	units = list(set(turnstile_weather['UNIT'].values.tolist()))
+
 	rain_by_unit = []
 	for unit in units:
 		data = turnstile_weather[turnstile_weather['UNIT']==unit][["DATEn","TIMEn","rain"]]
@@ -79,15 +92,10 @@ def rain_by_time_and_station(turnstile_weather):
 			
 		#print len(rain_by_date)
 		rain_by_unit.append(rain_by_date)
-
-
-	
-	
-	
 	print 'step 2 complete'
 
-	## create an bitmap image to represent the data 
-	## and write it to 'rain_by_unit_and_date.bmp'
+	## create a bitmap image to represent the data 
+	## and write it to 'rain_by_unit_and_date'
 	height = len(rain_by_unit)
 	width = len(rain_by_unit[0])
 	img = Image.new('RGB', (width,height), "black") # create a new blank image
@@ -96,7 +104,7 @@ def rain_by_time_and_station(turnstile_weather):
 	#print width
 	#print img.size
 
-	## here i is the index for date/time and j is the index for turnstile unit
+	## i is the index for date/time and j is the index for turnstile unit
 	for i in range(img.size[0]):
 		for j in range(img.size[1]):
 			#print i
@@ -112,18 +120,23 @@ def rain_by_time_and_station(turnstile_weather):
 	img.save("../rain_by_unit_and_date","bmp")
 
 
+## Create a line graph of overal ridership
+## over the course of the data collection...
 def ridership_by_time(turnstile_weather):
 
-	## create a dictionary of dates to numerical values,
-	## to keep track of order, and fill in blanks
+	## 1. create a python dictionary to map
+	## all of the dates and times in the dataset
+	## to numerical values.
 
 	dates = list(set(turnstile_weather['DATEn'].values.tolist()))
+
 	#print dates
 	dates_dict = {}
 	i=0 
 	for date in sorted(dates):
 		dates_dict[date]=i
 		i+=1
+
 	#print dates_dict
 
 	time_dict = {
@@ -134,14 +147,13 @@ def ridership_by_time(turnstile_weather):
 	"16:00:00":4,
 	"20:00:00":5	
 	}
-
 	print 'step 1 complete'
 	
 
-	## iterate through data for each unit,
-	## and enter
+	## 2. iterate through each entry of the data and
+	## add the hourly entries to the corresponding time and date
+	## of the "riders_by_date" list....
 	riders_by_date = [0]*(6*len(dates_dict))
-	#print len(rain_by_date)
 	for entry in turnstile_weather.iterrows():
 		pos = dates_dict[entry[1]["DATEn"]]*6+time_dict[entry[1]["TIMEn"]]
 
@@ -150,17 +162,19 @@ def ridership_by_time(turnstile_weather):
 	#print len(rain_by_date)
 	
 	print 'step 2 complete'
-
+	
+	## 3. make a line graph from the data
 	plt.plot(riders_by_date)
 	plt.show()
 	
 	
 
 
-
+## uncomment either of the lines below to 
+## generate the corresponding visualization...
 
 #entries_histogram(turnstile_weather)
-
 #rain_by_time_and_station(turnstile_weather)
+#ridership_by_time(turnstile_weather)
 
-ridership_by_time(turnstile_weather)
+

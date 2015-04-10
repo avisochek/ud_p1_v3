@@ -27,6 +27,8 @@ def compute_cost(features, values, theta):
     cost = (np.square(error)/(2*len(values))).sum()
     return cost
 
+
+
 def gradient_descent(features, values, theta, alpha, num_iterations):
     m = len(values)
     cost_history = []
@@ -43,6 +45,7 @@ def gradient_descent(features, values, theta, alpha, num_iterations):
     return theta, pandas.Series(cost_history)
 
 
+
 def predictions(dataframe):
     # Select Features (try different features!)
     #print "dataframe",dataframe
@@ -53,6 +56,7 @@ def predictions(dataframe):
 
     # Add another set of dummy variables for time of day and station
     hour_dummy_units = pandas.get_dummies(dataframe['hour'],prefix='hour')
+
     #station_dummy_units = pandas.get_dummies(dataframe['station'],prefix='station')
     #conds_dummy_units = pandas.get_dummies(dataframe['conds'],prefix='conds')    
 

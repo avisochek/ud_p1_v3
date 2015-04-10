@@ -49,14 +49,14 @@ def predictions(dataframe):
     features = dataframe[['rain','weekday']]
     
     # Add UNIT to features using dummy variables
-    ##unit_dummy_units = pandas.get_dummies(dataframe['UNIT'], prefix='unit')
+    unit_dummy_units = pandas.get_dummies(dataframe['UNIT'], prefix='unit')
 
     # Add another set of dummy variables for time of day and station
     hour_dummy_units = pandas.get_dummies(dataframe['hour'],prefix='hour')
     #station_dummy_units = pandas.get_dummies(dataframe['station'],prefix='station')
     #conds_dummy_units = pandas.get_dummies(dataframe['conds'],prefix='conds')    
 
-    ##features = features.join(unit_dummy_units)
+    features = features.join(unit_dummy_units)
     features = features.join(hour_dummy_units)
     #features = features.join(conds_dummy_units)
     #features = features.join(station_dummy_units)

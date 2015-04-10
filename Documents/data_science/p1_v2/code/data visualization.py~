@@ -7,10 +7,17 @@ from PIL import Image
 import numpy as np
 
 
+## import data to turnstile_weather dataframe...
 filepath = '../turnstile_weather_v2.csv'
 turnstile_weather = pandas.read_csv(filepath)
 
 
+
+
+## generate two histogram of the total hourly entries
+## on the same plot,
+## one for the entries when it was raining 
+## and the other when it was not raining
 def entries_histogram(turnstile_weather):
     
     plt.figure()
@@ -30,8 +37,12 @@ def entries_histogram(turnstile_weather):
     return
 
 
+
+
 ## generate a bitmap image, where the horizontal axis represents the 4 hour periods
 ## over the month of may, and the vertical axis reprsents each individual turnstile collection unit.
+## color a pixel white if it was rainging, black if it was not, or red if the data is not available...
+
 def rain_by_time_and_station(turnstile_weather):
 
 	##Obtain a list of each of the turnstile units
@@ -157,10 +168,9 @@ def ridership_by_time(turnstile_weather):
 	
 
 
-
+## uncomment either of the lines below to 
+## generate the corresponding visualization...
 
 #entries_histogram(turnstile_weather)
-
 #rain_by_time_and_station(turnstile_weather)
-
 ridership_by_time(turnstile_weather)
