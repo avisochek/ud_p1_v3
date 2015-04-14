@@ -13,12 +13,12 @@
 	<ul>
 	<li>Mean with no rain: 1105.5</li>
 	<li>Mean with rain: 1090.3</li>
-	<li>p value: 0.0249</li>
+	<li>p value: 0.498</li>
 	</ul>
 
 <h3>1.4 What is the significance and interpretation of these results?</h3>
 
-	<p>With a p critical value of 0.05 (divided by 2 for a 2 tailed test) the given p value of .0249 just barely "passes" the test. The means for clear and rainy days differ from one another by approximately 1%. While the difference in means appears otherwise insignificant, the result from the Mann Whitney U test demonstrates that the ridership on rainy days is consistently higher than the ridership on clear days.</p>
+	<p>With a p critical value of 0.05 .0498 just barely "passes" the test. The means for clear and rainy days differ from one another by approximately 1%. While the difference in means appears otherwise insignificant, the result from the Mann Whitney U test demonstrates that the ridership on rainy days is consistently higher than the ridership on clear days.</p>
 
 <h3>Section 2. Linear Regression</h3>
 
@@ -104,8 +104,9 @@ plots. Also, please add a short description below each figure commenting on the 
 
     <h5>Ridership by time-of-day or day-of-week</h5>
     <h5>Which stations have more exits or entries at different times of day</h5>
-<img src="visualizations/rain_by_unit_and_date.png">
-<p>This image shows that most of the rainy time periods for each unit occur in unison with one another (since we see vertical white bands, rather than randomly distributed white pixels). We can see from the visualization that only four periods of rain occur during the course of this data collection. Moreover, we can see that most of the rainy days occur during one stretch of time towards the middle of the data collection period.</p>
+<img src="visualizations/ridership_by_time_and_date.png">
+<p>This line graph shows the total hourly entries in each consecutive time period. We can see from the graph that there are fairly regular patterns of ridership volume over the course of the data collection, with more riders on Saturdays than Sundays, about twice the ridership on the weekdays, and slightly increasing ridership as the week progresses. There is one instance of three consecutive days with decreased overall ridership, which is likely due to a holiday.</p>
+
 <h3>Section 4. Conclusion</h3>
 
 <h3>Please address the following questions in detail. Your answers should be 1-2 paragraphs long.</h3>
@@ -113,14 +114,13 @@ plots. Also, please add a short description below each figure commenting on the 
 <h3>4.1 From your analysis and interpretation of the data, do more people ride
 the NYC subway when it is raining or when it is not raining? </h3>
  
-	<p>It appears to be the case from the analysis that more people ride the subway when it is raining from the data analysis, although there is not enough data to make a conclusion either way.</p>
+	<p>It appears to be the case from the analysis that more people ride the subway when it is raining from the data analysis.</p>
 
 <h3>4.2 What analyses lead you to this conclusion? You should use results from both your statistical
 tests and your linear regression to support your analysis.</h3>
     
 	<p>The mean hourly entries on days with rain was observed to be slightly greater than that of the mean hourly entries on days without rain (by approximately 1%). The Mann Whitney U test generated a p value which was just barely under the threshold for passing the threshold for passing the p test. resulted in a significantly low p value. This demonstrated a trend of consistently higher hourly entries on rainy days.</p>
 	<p>The theta value from the linear regression model was negative, and approximately 10% the size of the other theta values. This alone is not particularly helpful, because it is clear from the resulting theta values that the volume of ridership is affected more significantly by the hour and day of the week parameters. However along with the results from the statistical analysis, it does help to reinforce the trend for more people to ride the subway when it is raining.</p>
-	<p>Most importantly however, the observation from second data visualization showed that most of the rainy entries occured during a single stretch of time. This means that any number of other events during the time it was raining, including the time of day and the day of the week, could have influence the results of the statistical analysis. This is what lead me to conclude that there is not sufficient data to imply weather or not the presence of rain has a noticable effect on ridership.</p>
 
 <h3>Section 5. Reflection</h3>
 
@@ -141,8 +141,6 @@ of your analysis, include limitations of and/or issues with the:</h3>
 
     <h3>5.1.3: Statistical tests:</h3>
 	<p>The limited time span of this data set makes it difficult to generalize the results of the statistical analysis to a larger population.</p>
-<p>The Mann Whitney U test assumes two identical distributions. As was observed in the second data visualization, the distributions of ridership volume on rainy and non rainy days are not independent, because they occur at two distinct times. This means that it is possible something else influenced the results of the test during these periods.</p>
 
 <h3>5.2 (Optional) Do you have any other insight about the dataset that you would like to share with us?</h3>
-	<p>While it was not included in this document, I made a basic visualization of overall ridership by time and date (included in the visualizations folder). The visualization showed pretty consistent patterns of ridership volume by time of day and weekday/weekend (except for what appears to be memorial day towards the end). <p></p>It is a bit surprising then that the linear regression model --which took both parameters into account-- did not produce a better fit. It may be that these patterns have an overall trend, but vary considerably between different neighborhoods.</p>
-<p>Another point worth mentioning is that while looking at the visualization of rain by time and date, I saw that nearly all of the missing data points occured in clusters and at periodic intervals. This may be intentional (i.e. regular maintanance), although if it is not, it might indicate periodic failure of the data collection system that could be looked into.</p>
+	<p>No.</p>

@@ -21,14 +21,15 @@ turnstile_weather = pandas.read_csv(filepath)
 def entries_histogram(turnstile_weather):
     
     plt.figure()
-
+    plt.ylim(0,4000)
+    plt.xlim(0,15000)
     plt.xlabel('hourly entries')
     plt.ylabel('frequency')
     #plot a historgram for hourly entries when it is not raining
-    turnstile_weather[turnstile_weather['rain']==False]["ENTRIESn_hourly"].hist(bins=80, label = "no rain")
+    turnstile_weather[turnstile_weather['rain']==False]["ENTRIESn_hourly"].hist(bins=40, label = "no rain")
 
     #plot a historgram for hourly entries when it is raining
-    turnstile_weather[turnstile_weather['rain']==True]["ENTRIESn_hourly"].hist(bins=80, label = "rain")
+    turnstile_weather[turnstile_weather['rain']==True]["ENTRIESn_hourly"].hist(bins=40, label = "rain")
 
     #put in a legend...
     plt.legend()
@@ -164,6 +165,9 @@ def ridership_by_time(turnstile_weather):
 	print 'step 2 complete'
 	
 	## 3. make a line graph from the data
+
+	plt.xlabel('time')
+	plt.ylabel('hourly_entries')
 	plt.plot(riders_by_date)
 	plt.show()
 	
@@ -173,7 +177,7 @@ def ridership_by_time(turnstile_weather):
 ## uncomment either of the lines below to 
 ## generate the corresponding visualization...
 
-#entries_histogram(turnstile_weather)
+entries_histogram(turnstile_weather)
 #rain_by_time_and_station(turnstile_weather)
 #ridership_by_time(turnstile_weather)
 
